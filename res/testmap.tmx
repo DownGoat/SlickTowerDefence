@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="20" height="15" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="greybrickxcf" tilewidth="32" tileheight="32">
+  <image source="greybrickxcf.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="5" name="earthygrass" tilewidth="32" tileheight="32">
+  <image source="earthygrass.png" width="64" height="64"/>
+  <tile id="0">
+   <properties>
+    <property name="walkable" value="1"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="9" name="greygreentileset" tilewidth="32" tileheight="32">
+  <image source="greygreentileset.png" width="64" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="position" value="0"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="position" value="1"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Tile Layer 3" width="20" height="15">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA2NgGNyAa6AdMIQB50A7YBSMAioDAGQpGOawBAAA
+  </data>
+ </layer>
+ <layer name="Tile Layer 1" width="20" height="15">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA2NkYGBgHMWjeBSP4iGAATEAE1WwBAAA
+  </data>
+ </layer>
+ <layer name="Tile Layer 2" width="20" height="15">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA2NgGHjAigPjkyOkB5sd5LiLGPOo7T5S3YrLPHT7KHEfNvtopY7a7iNW/UC5j9rqqOE+cvxDLCA2HWIDAAgkg9iwBAAA
+  </data>
+ </layer>
+</map>
