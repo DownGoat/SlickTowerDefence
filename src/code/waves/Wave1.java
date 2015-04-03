@@ -23,7 +23,7 @@ public class Wave1 extends Wave {
 			e.printStackTrace();
 		}
 		
-		for (int x = 0; x < 5; x++) {
+		for (int x = 0; x < 2; x++) {
 			creeps.add((Creep) new Rat(path, img));
 		}
 		

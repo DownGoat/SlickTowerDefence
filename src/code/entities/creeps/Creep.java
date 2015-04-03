@@ -23,7 +23,7 @@ public abstract class Creep extends CollisionEntity {
 		// Must multiply with 32 since the map tuple is the tile cord, and not pixel cord. 
 		this.x = (float) (path.peek().getX() * 32);
 		this.y = (float) (path.peek().getY() * 32);
-		this.setPath(path);
+		this.path = path;
 		this.img = img;
 		collisionRect = new Rectangle(x, y, img.getWidth(), img.getHeight());		
 	}

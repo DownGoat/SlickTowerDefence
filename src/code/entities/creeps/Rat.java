@@ -14,7 +14,7 @@ public class Rat extends Creep {
 		super(path, img);
 		velocity = 750;
 		spawnDelay = velocity;
-		hp = 5;
+		hp = 500;
 	}
 	
 	
