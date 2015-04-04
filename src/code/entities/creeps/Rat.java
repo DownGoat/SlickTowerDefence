@@ -16,6 +16,9 @@ public class Rat extends Creep {
 		spawnDelay = velocity;
 		hp = 10;
 		goldWorth = 1;
+		
+		// Freezes the game when pressing ready
+		//animation.setSpeed(velocity);
 	}
 	
 	

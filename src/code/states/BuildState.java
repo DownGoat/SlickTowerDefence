@@ -92,7 +92,7 @@ public class BuildState extends BasicGameState {
 			if (placeMode) {
 				float xtile = (input.getMouseX() -(input.getMouseX() % 32)) / 32;
 				float ytile = (input.getMouseY() -(input.getMouseY() % 32)) / 32;
-				Buildings.add(new BasicTower(xtile, ytile, "res/basictower32.png"));
+				Buildings.add(new BasicTower(xtile, ytile, "res/basictower/basictower_animation.png"));
 				placeMode = false;
 				Gold.decrease(BasicTowerInfo.getPRICE());
 			}

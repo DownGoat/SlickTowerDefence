@@ -22,6 +22,7 @@ import code.datastructures.Projectiles;
 import code.entities.Projectile;
 import code.entities.creeps.Creep;
 import code.entities.towers.Tower;
+import code.waves.*;
 import code.waves.Wave1;
 
 public class WaveState extends BasicGameState {
@@ -30,10 +31,12 @@ public class WaveState extends BasicGameState {
 	
 	public Queue<MapTuple> path = new LinkedList<MapTuple>();
 	private LinkedList<Creep> spawnedCreeps = new LinkedList<Creep>();
+	private LinkedList<Wave> waves;
 	
 	private Iterator<Creep> spawnIterator;
 	private int spawnTimer = 0;
 	private int spawnDelay;
+	
 
 	public WaveState(int stateID) {
 		this.stateID = stateID;	
@@ -47,19 +50,12 @@ public class WaveState extends BasicGameState {
 		theMap = new TiledMap("res/testmap.tmx");		
 		generatePath();
 		
-		Creeps.clear();
-		new Wave1().initWave(path);
-		
-		
-		
-		spawnIterator = Creeps.getCreeps().iterator();
-		spawnedCreeps.add(spawnIterator.next());
-		spawnDelay = spawnedCreeps.getFirst().getSpawnDelay();
+		loadWaves();		
 	}
 
 	public void resert() {
 		Creeps.clear();
-		new Wave1().initWave(path);
+		waves.poll().initWave(path);
 		
 		
 		
@@ -177,7 +173,8 @@ public class WaveState extends BasicGameState {
 	}
 	
 	/**
-	 * Depth First Search for finding the paths. DFS is good enough since there is
+	 * Depth First Search for finding the paths. DFS is
+		waves = LinkedList<Wave>() good enough since there is
 	 * only one path
 	 * @param theStack
 	 * @param been
@@ -246,5 +243,15 @@ public class WaveState extends BasicGameState {
 				}
 			}
 		}
+	}
+	
+	public void loadWaves() {
+		waves = new LinkedList<Wave>();
+		waves.add(new Wave6());
+		waves.add(new Wave2());
+		waves.add(new Wave3());
+		waves.add(new Wave4());
+		waves.add(new Wave5());
+		waves.add(new Wave6());
 	}
 }

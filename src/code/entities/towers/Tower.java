@@ -2,8 +2,10 @@ package code.entities.towers;
 
 import java.util.LinkedList;
 
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheet;
 
 import code.datastructures.Creeps;
 import code.datastructures.Projectiles;
@@ -13,7 +15,8 @@ import code.entities.creeps.Creep;
 
 
 public  abstract class Tower extends Entity {
-	protected Image img;
+	protected SpriteSheet sheet;
+	protected Animation animation;
 	protected long lastShot = 0;
 	protected LinkedList<Projectile> projectiles;
 	protected LinkedList<Creep> spawnedCreeps;
@@ -27,22 +30,26 @@ public  abstract class Tower extends Entity {
 		this.y = y * 32;
 		
 		try {
-			img = new Image(imgPath);
+			sheet = new SpriteSheet(imgPath, 32, 32);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+		animation = new Animation(sheet, 1000);
+		
 	}
 
 	@Override
 	public void draw() {
-		img.draw(x, y);
+		animation.draw(x, y);
 	}
 
 	@Override
 	public void logic(int delta) {
 		lastShot += delta;
+		animation.update(delta);
+		
 		
 		if (lastShot >= attackSpeed) {
 			fireShot();

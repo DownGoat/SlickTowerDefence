@@ -1,5 +1,7 @@
 package code.datastructures;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
 
 import code.entities.creeps.Creep;
@@ -35,6 +37,10 @@ public class Creeps {
 		}
 		
 		creeps.clear();
+	}
+	
+	public static void shuffel() {
+		Collections.shuffle(creeps);
 	}
 	
 	private Creeps(){};

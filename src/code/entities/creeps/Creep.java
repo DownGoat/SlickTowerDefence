@@ -3,8 +3,10 @@ package code.entities.creeps;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.geom.Rectangle;
 
 import code.MapTuple;
@@ -12,23 +14,29 @@ import code.entities.CollisionEntity;
 
 
 public abstract class Creep extends CollisionEntity {
-	protected Image img;
+	protected SpriteSheet sheet;
 	protected long lastMove = 0;
 	protected int hp;
 	protected int velocity;
 	protected int spawnDelay;
 	protected Queue<MapTuple> localPath = new LinkedList<MapTuple>();
 	protected int goldWorth;
+	protected Animation animation;
+	protected float rotation;
+	protected boolean rotate = true;
 	
 	
 	public Creep(Queue<MapTuple> path, String imgPath) {
 		
 		try {
-			img = new Image(imgPath);
+			sheet = new SpriteSheet(imgPath, 32, 32);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		animation = new Animation(sheet, 750);
+		rotation = 0;
 		
 		// Copy
 		for (MapTuple mt : path) {
@@ -38,19 +46,25 @@ public abstract class Creep extends CollisionEntity {
 		this.x = (float) (localPath.peek().getX() * 32);
 		this.y = (float) (localPath.peek().getY() * 32);
 
-		collisionRect = new Rectangle(x, y, img.getWidth(), img.getHeight());		
+		collisionRect = new Rectangle(x, y, animation.getImage(0).getWidth(), animation.getImage(0).getHeight());		
 	}
 	
 	
 
 	@Override
 	public void draw() {
-		img.draw(x, y);
+		if (rotate) {
+			animation.getCurrentFrame().setRotation(rotation);
+		}
+		
+		animation.draw(x, y);
 	}
 	
 	@Override
 	public void logic(int delta) {
 		lastMove += delta;
+		
+		animation.update(delta);
 		
 		float oldx = x;
 		float oldy = y;
@@ -68,16 +82,16 @@ public abstract class Creep extends CollisionEntity {
 		
 		
 		if (oldx - x < 0) {
-			img.setRotation(90);
+			rotation = 90;
 		}
 		else if (oldx - x > 0) {
-			img.setRotation(-90);
+			rotation = -90;
 		}
 		else if (oldy - y > 0) {
-			img.setRotation(0);
+			rotation = 0;
 		}
 		else if (oldy - y < 0) {
-			img.setRotation(180);
+			rotation = 180;
 		}
 	
 		
@@ -106,19 +120,6 @@ public abstract class Creep extends CollisionEntity {
 	public int getSpawnDelay() {
 		return spawnDelay;
 	}
-
-
-
-	public Image getImg() {
-		return img;
-	}
-
-
-
-	public void setImg(Image img) {
-		this.img = img;
-	}
-
 
 
 	public long getLastMove() {
