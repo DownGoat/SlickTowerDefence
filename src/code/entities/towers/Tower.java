@@ -1,27 +1,33 @@
-package code.entities;
+package code.entities.towers;
 
 import java.util.LinkedList;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
+import code.datastructures.Creeps;
+import code.datastructures.Projectiles;
+import code.entities.Entity;
+import code.entities.Projectile;
 import code.entities.creeps.Creep;
 
 
-public class Tower extends Entity {
-	public Image img;
-	private long lastShot = 0;
-	private LinkedList<Creep> creeps;
-	private LinkedList<Projectile> projectiles;
+public  abstract class Tower extends Entity {
+	protected Image img;
+	protected long lastShot = 0;
+	protected LinkedList<Projectile> projectiles;
+	protected LinkedList<Creep> spawnedCreeps;
+	protected static int damage;
+	protected static int price;
+	protected static int attackSpeed;
 	
-	public Tower(float x, float y, LinkedList<Creep> creeps, LinkedList<Projectile> projectiles) {
+	
+	public Tower(float x, float y, String imgPath) {
 		this.x = x * 32;
 		this.y = y * 32;
-		this.creeps = creeps;
-		this.projectiles = projectiles;
 		
 		try {
-			img = new Image("res/tower.png");
+			img = new Image(imgPath);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -38,17 +44,20 @@ public class Tower extends Entity {
 	public void logic(int delta) {
 		lastShot += delta;
 		
-		if (lastShot >= 1000) {
+		if (lastShot >= attackSpeed) {
 			fireShot();
 			lastShot = 0;
 		}
 	}
 	
 	public void fireShot() {
-		Creep closest = creeps.getFirst();
+		if (spawnedCreeps.size() == 0) {
+			return;
+		}
+		Creep closest = spawnedCreeps.getFirst();
 		float closestDistance = (float) Math.sqrt(Math.pow((this.x - closest.getX()), 2) + Math.pow((this.y - closest.getY()), 2));
 		
-		for(Creep creep: creeps) {
+		for(Creep creep: spawnedCreeps) {
 			float distance = (float) Math.sqrt(Math.pow((this.x - creep.getX()), 2) + Math.pow((this.y - creep.getY()), 2));
 			if (distance < closestDistance) {
 				closestDistance = distance;
@@ -63,10 +72,13 @@ public class Tower extends Entity {
 		float Xdirection = closest.getX() - x + 12;
 		float Ydirection = closest.getY() - y + 8;
 		// Same here.
-		projectiles.add(new Projectile(rotation, x + 12, y + 8, Xdirection, Ydirection));
-		
-		
-		
+		Projectiles.getProjectiles().add(this.generateProjectile(rotation, Xdirection, Ydirection));
 	}
+	
+	public void setSpawnedCreeps(LinkedList<Creep> spawnedCreeps) {
+		this.spawnedCreeps = spawnedCreeps;
+	}
+	
+	protected abstract Projectile generateProjectile(double rotation, float Xdirection, float Ydirection);
 
 }

@@ -10,11 +10,12 @@ import code.MapTuple;
 
 public class Rat extends Creep {
 
-	public Rat(Queue<MapTuple> path, Image img) {
+	public Rat(Queue<MapTuple> path, String img) {
 		super(path, img);
-		velocity = 750;
+		velocity = 600;
 		spawnDelay = velocity;
-		hp = 500;
+		hp = 10;
+		goldWorth = 1;
 	}
 	
 	

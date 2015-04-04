@@ -7,5 +7,5 @@ import code.MapTuple;
 import code.entities.creeps.Creep;
 
 public abstract class Wave {	
-	public abstract LinkedList<Creep> initWave(Queue<MapTuple> path);
+	public abstract void initWave(Queue<MapTuple> path);
 }
