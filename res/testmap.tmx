@@ -24,6 +24,14 @@
    </properties>
   </tile>
  </tileset>
+ <tileset firstgid="11" name="ground_sheet" tilewidth="32" tileheight="32">
+  <image source="ground_texture/ground_sheet.png" width="160" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="walkable" value="1"/>
+   </properties>
+  </tile>
+ </tileset>
  <layer name="Tile Layer 3" width="20" height="15">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAA2NgGNyAa6AdMIQB50A7YBSMAioDAGQpGOawBAAA
@@ -37,6 +45,11 @@
  <layer name="Tile Layer 2" width="20" height="15">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAA2NgGHjAigPjkyOkB5sd5LiLGPOo7T5S3YrLPHT7KHEfNvtopY7a7iNW/UC5j9rqqOE+cvxDLCA2HWIDAAgkg9iwBAAA
+  </data>
+ </layer>
+ <layer name="Tile Layer 4" width="20" height="15">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA72TwQrAMAhDvZe2//+3PQklaGY22SHQoqaPUJeZLVE7EauxmZGI1Z5mJshrfq+w3X6YwYCzyhf5bagr+UV++N4XPs8N/Rgn84uyrHC+9VPz+5Ovu6+DD/sre5Lp3kPlH0Y6dkSP7bAEAAA=
   </data>
  </layer>
 </map>

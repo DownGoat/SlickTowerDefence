@@ -14,7 +14,7 @@ public class Rat extends Creep {
 		super(path, img);
 		velocity = 600;
 		spawnDelay = velocity;
-		hp = 10;
+		hp = 15;
 		goldWorth = 1;
 		
 		// Freezes the game when pressing ready

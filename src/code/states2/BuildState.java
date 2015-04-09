@@ -3,8 +3,6 @@ package code.states;
 import java.util.LinkedList;
 
 import org.newdawn.slick.*;
-import org.newdawn.slick.geom.Circle;
-import org.newdawn.slick.geom.Path;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -29,7 +27,6 @@ public class BuildState extends BasicGameState {
 	private UIElement ready;
 	private UIElement basicTower;
 	private UIElement placeholder;
-	private UIElement placer;
 
 	private TiledMap theMap;
 	// For colliding with UI elements.
@@ -50,11 +47,10 @@ public class BuildState extends BasicGameState {
 		UIelements = new LinkedList<UIElement>();
 		bottom = new UIElement("res/bottommenu.png", 0, 352);
 		UIelements.add(bottom);
-		basicTower = new UIElement("res/basictower32.png", 4, 356);
+		basicTower = new UIElement("res/basictower64.png", 4, 356);
 		UIelements.add(basicTower);
 		ready = new UIElement("res/ready.png", (float) (320 - 64),  20);
 		UIelements.add(ready);
-		placer = new UIElement("res/basictower32.png", 0, 0);
 
 	}
 
@@ -77,13 +73,6 @@ public class BuildState extends BasicGameState {
 			
 			drawTowerInfo(g);
 		}
-		
-		else {
-			placer.draw();
-		}
-		
-		
-		
 	}
 
 	private void drawTowerInfo(Graphics g) {
@@ -99,15 +88,10 @@ public class BuildState extends BasicGameState {
 		
 
 		Input input = gc.getInput();
-		float xtile = (input.getMouseX() -(input.getMouseX() % 32));
-		float ytile = (input.getMouseY() -(input.getMouseY() % 32));
-		placer.setX(xtile);
-		placer.setY(ytile);
-		
 		if (input.isMousePressed(input.MOUSE_LEFT_BUTTON)) {
 			if (placeMode) {
-				xtile = (input.getMouseX() -(input.getMouseX() % 32)) / 32;
-				ytile = (input.getMouseY() -(input.getMouseY() % 32)) / 32;
+				float xtile = (input.getMouseX() -(input.getMouseX() % 32)) / 32;
+				float ytile = (input.getMouseY() -(input.getMouseY() % 32)) / 32;
 				Buildings.add(new BasicTower(xtile, ytile, "res/basictower/basictower_animation.png"));
 				placeMode = false;
 				Gold.decrease(BasicTowerInfo.getPRICE());

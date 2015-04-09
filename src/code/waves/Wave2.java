@@ -16,7 +16,7 @@ public class Wave2 extends Wave {
 	public void initWave(Queue<MapTuple> path) {
 		LinkedList<Creep> creeps = Creeps.getCreeps();		
 		
-		for (int x = 0; x < 8; x++) {
+		for (int x = 0; x < 10; x++) {
 			creeps.add((Creep) new Rat(path, "res/rat/rat_animation.png"));
 		}
 	}
